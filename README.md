@@ -20,4 +20,11 @@
   - Search Bar
   - Movie Suggestion
 
+  - MainContainer
+   -VideoBackground
+   -VideoTitle
+  - seconderyContainer
+   - movieList * n
+   - card * n
+
 

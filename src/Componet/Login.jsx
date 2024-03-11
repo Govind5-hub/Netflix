@@ -23,7 +23,6 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
   const handleButtonClick = () => {
-    console.log("Hi");
     const message = checkValidData(
       name.current ? name.current.value : "",
       email.current ? email.current.value : "",
@@ -32,18 +31,16 @@ const Login = () => {
     setErrorMessage(message);
     if (message) return;
     if (!isSignInForm) {
-      // sign Up logic
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
         password.current.value
       )
         .then((userCredential) => {
-          // Signed up
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: { PHOTO_URL },
+            photoURL: PHOTO_URL,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -55,21 +52,15 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              // Profile updated!
-              // ...
             })
             .catch((error) => {
               setErrorMessage(error.message);
-              // An error occurred
-              // ...
             });
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorMessage + errorCode);
-          // ..
         });
     } else {
       //Sign In Logic
@@ -122,7 +113,7 @@ const Login = () => {
         <input
           ref={password}
           type="password"
-          placeholder="PassWord"
+          placeholder="Password"
           className="p-2 my-4 w-full bg-gray-700 rounded-lg"
         />
         <p>{errorMessage}</p>
